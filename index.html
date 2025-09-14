@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ur" dir="rtl">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MyLightShop</title>
+  <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <h1>MyLightShop</h1>
+    <input id="search" placeholder="مصنوعات تلاش کریں..." />
+  </header>
+
+  <main class="container">
+    <section id="product-grid" class="grid">
+      {% for p in products %}
+      <article class="card">
+        <div class="img-wrap">
+          <img class="prod-img" src="/{{ p.image }}" alt="{{ p.title }}" loading="lazy">
+          <div class="img-shadow"></div>
+        </div>
+        <div class="card-body">
+          <h3 class="title">{{ p.title }}</h3>
+          <p class="price">{{ p.price }}</p>
+          <button class="btn">Add to cart</button>
+        </div>
+      </article>
+      {% endfor %}
+    </section>
+  </main>
+
+  <script>
+    const search = document.getElementById('search');
+    const cards = Array.from(document.querySelectorAll('.card'));
+    search.addEventListener('input', e=>{
+      const q = e.target.value.trim().toLowerCase();
+      cards.forEach(card=>{
+        const txt = card.querySelector('.title').textContent.toLowerCase();
+        card.style.display = txt.includes(q) ? '' : 'none';
+      });
+    });
+  </script>
+</body>
+</html>

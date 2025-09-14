@@ -1,0 +1,101 @@
+/* CSS Styles for lightweight ecommerce site */
+
+:root{
+  --bg:#f7f8fb;
+  --card:#ffffff;
+  --accent:#0b66ff;
+  --muted:#666;
+  --maxw:1100px;
+}
+*{box-sizing:border-box}
+body{
+  font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+  margin:0;
+  background:var(--bg);
+  color:#111;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+}
+.site-header{
+  display:flex;
+  gap:12px;
+  align-items:center;
+  justify-content:space-between;
+  padding:16px;
+  max-width:var(--maxw);
+  margin:16px auto;
+}
+.site-header h1{margin:0;font-size:20px}
+.site-header input{
+  padding:8px 10px;
+  border-radius:8px;
+  border:1px solid #ddd;
+  width:220px;
+}
+
+/* grid */
+.container{max-width:var(--maxw);margin:10px auto;padding:0 16px}
+.grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap:18px;
+}
+
+/* card */
+.card{
+  background:var(--card);
+  border-radius:12px;
+  padding:14px;
+  box-shadow: 0 6px 18px rgba(15,20,30,0.04);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.card:hover{ transform:translateY(-6px); box-shadow:0 10px 28px rgba(15,20,30,0.08); }
+
+/* image area */
+.img-wrap{ position:relative; width:100%; max-width:180px; height:160px; display:flex; align-items:center; justify-content:center; margin-bottom:12px; }
+.img-wrap .prod-img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:10px;
+  z-index:2;
+  transform: translateY(-6px); /* slight lift */
+  transition: transform .18s ease;
+  box-shadow: 0 12px 30px rgba(10,10,10,0.09);
+}
+.img-wrap .img-shadow{
+  position:absolute;
+  left:50%;
+  transform:translateX(-50%);
+  bottom:8px;
+  width:70%;
+  height:22px;
+  border-radius:50%;
+  filter: blur(10px);
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.18) 0%, rgba(0,0,0,0.06) 60%, transparent 80%);
+  z-index:1;
+  transition: transform .18s ease, opacity .18s ease;
+  opacity:0.95;
+}
+.card:hover .prod-img{ transform: translateY(-14px) scale(1.02); }
+.card:hover .img-shadow{ transform: translateX(-50%) translateY(6px) scale(1.12); opacity:1; }
+
+.card-body{ width:100%; text-align:center; padding:6px 4px 2px; }
+.title{ font-size:15px; margin:6px 0 4px; }
+.price{ color:var(--accent); font-weight:600; margin:0 0 8px; }
+.btn{
+  background:var(--accent);
+  color:#fff;
+  border:none;
+  padding:8px 12px;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:600;
+}
+@media (max-width:420px){
+  .img-wrap{ max-width:140px; height:120px; }
+  .site-header input{ width:140px; }
+}
